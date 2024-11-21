@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package todoPackage;
+
+// Define the service and its RPC methods
+service Todo {
+    rpc CreateTodo (TodoItem) returns (TodoItem);
+    rpc ReadTodos (Void) returns (TodoItems); // Note the return type corrected to TodoItems
+    rpc ReadTodosStream(voidNoParams) returns(stream TodoItems);
+}
+
+// Define an empty message for Void (needed for ReadTodos)
+message Void {}
+message voidNoParams {}
+
+// Define a single TodoItem
+message TodoItem {
+    int32 id = 1;
+    string text = 2;
+}
+
+// Define a collection of TodoItems
+message TodoItems {
+    repeated TodoItem items = 1; // Corrected to "repeated" for a list of items
+}
